@@ -10,6 +10,8 @@ public class shootProjectile : MonoBehaviour
     bool targetSighted = false;
 
     private GameObject thisEntity;
+
+    [SerializeField]
     private GameObject target;
 
     //on start, stores the current gameobject as a variable
@@ -38,6 +40,7 @@ public class shootProjectile : MonoBehaviour
 
             //ray used as an indicator of if the target can be seen
             Ray sight = new Ray(thisEntity.transform.position, target.transform.position);
+            Debug.DrawRay(thisEntity.transform.position, target.transform.position);
 
             //does a raycast to stored target
             if (Physics.Raycast(sight, out targetInSight, 100000))
