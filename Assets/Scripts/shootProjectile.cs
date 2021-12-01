@@ -11,89 +11,66 @@ public class shootProjectile : MonoBehaviour
 
     private GameObject thisEntity;
 
-    [SerializeField]
-    private GameObject target;
-
     //on start, stores the current gameobject as a variable
     private void Start()
     {
         thisEntity = gameObject;
     }
 
-    //setter method to set the current target for the entity
-    public void setTarget(GameObject newTarget)
+    public void setTargetSighted(bool targetInSight)
     {
-        target = newTarget;
+        targetSighted = targetInSight;
     }
 
+
+    public void Shoot(GameObject target)
+    {
+        //seperate ray for the actual projectile
+        Vector3 thisEntityPosition = thisEntity.transform.position;
+        Vector3 targetPosition = target.transform.position;
+        Vector3 direction = (targetPosition - thisEntityPosition).normalized;
+
+        Vector3 randomAngle = Random.insideUnitSphere;
+
+        direction.Scale(randomAngle);
+        direction.Scale(new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), Random.Range(0f, 2f)));
+
+        Ray projectile = new Ray(thisEntityPosition, direction);
+
+        //only needs to run if the target is in sight
+        if (targetSighted == true)
+        {
+            RaycastHit targetHit;
+            
+
+            if (Physics.Raycast(projectile,out targetHit))
+            {
+                if (targetHit.transform.gameObject.name != null && targetHit.transform.gameObject.name == target.name)
+                {
+                    Debug.Log("Target hit");
+                    Debug.DrawRay(thisEntityPosition, projectile.direction * 10, Color.yellow, 10f);
+                }
+                else
+                {
+                    Debug.Log("Target Missed");
+                    Debug.DrawRay(thisEntityPosition, projectile.direction * 10, Color.blue, 10f);
+                }
+
+
+            }
+
+
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (target != null)
-        {
+        
 
-            //RaycastHit used to get the target name when 
-            RaycastHit targetInSight;
-
-
-
-            //ray used as an indicator of if the target can be seen
-            Ray sight = new Ray(thisEntity.transform.position, target.transform.position);
-            Debug.DrawRay(thisEntity.transform.position, target.transform.position);
-
-            //does a raycast to stored target
-            if (Physics.Raycast(sight, out targetInSight, 100000))
-            {
-
-                //if the raycast hits the right target, print to console the event
-                if (targetInSight.transform.parent.name != null && targetInSight.transform.parent.name == target.name)
-                {
-                    Debug.Log(targetInSight.transform.parent.name + " sighted by: " + thisEntity.name);
-                    targetSighted = true;
-                }
-                else if (targetInSight.transform.parent.name != null)
-                {
-                    Debug.Log("Target Obstructed");
-                }
-                else
-                {
-                    Debug.Log("Target not Found");
-                }
-            }
-
-            //seperate ray for the actual projectile
-            Ray projectile = new Ray(thisEntity.transform.position, target.transform.position);
-
-            //only needs to run if the target is in sight
-            if (targetSighted == true)
-            {
-                RaycastHit targetHit;
-
-                //vector3 used to add randomness to each shot
-                Vector3 randomAngle = Random.rotation.eulerAngles;
-
-                projectile.direction = sight.direction;
-                projectile.direction.Scale(randomAngle);
-
-                if (Physics.Raycast(projectile, out targetHit))
-                {
-                    if(targetHit.transform.parent.name != null && targetHit.transform.parent.name == target.name)
-                    {
-                        Debug.Log("Target hit");
-                    }
-                    else
-                    {
-                        Debug.Log("Target Missed");
-                    }
-
-                    
-                }
-
-
-            }
-        }
+           
     }
-
-
 }
+
+
+
