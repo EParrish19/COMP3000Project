@@ -68,22 +68,12 @@ public class sight : MonoBehaviour
             if (targetSighted == true)
             {
 
-                bool shot = false;
-                float timer = 1f;
-
-                while (shot != true)
-                {
-                    if (timer <= 0f)
-                    {
-                        projectileShoot.setTargetSighted(targetSighted);
-                        projectileShoot.Shoot(target);
-                        shot = true;
-                    }
-                    else
-                    {
-                        timer -= Time.fixedDeltaTime;
-                    }
-                }
+                projectileShoot.setTarget(target);
+                projectileShoot.setTargetSighted(targetSighted);
+            }
+            else
+            {
+                projectileShoot.setTargetSighted(targetSighted);
             }
               
         }

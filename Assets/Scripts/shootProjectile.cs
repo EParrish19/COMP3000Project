@@ -10,6 +10,7 @@ public class shootProjectile : MonoBehaviour
     bool targetSighted = false;
 
     private GameObject thisEntity;
+    private GameObject target;
 
     //on start, stores the current gameobject as a variable
     private void Start()
@@ -22,6 +23,11 @@ public class shootProjectile : MonoBehaviour
         targetSighted = targetInSight;
     }
 
+    public void setTarget(GameObject newTarget)
+    {
+        target = newTarget;
+    }
+
 
     public void Shoot(GameObject target)
     {
@@ -30,10 +36,12 @@ public class shootProjectile : MonoBehaviour
         Vector3 targetPosition = target.transform.position;
         Vector3 direction = (targetPosition - thisEntityPosition).normalized;
 
-        Vector3 randomAngle = Random.insideUnitSphere;
+        Vector3 randomAngle = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), Random.Range(0f, 15f));
+        randomAngle = randomAngle.normalized;
 
-        direction.Scale(randomAngle);
-        direction.Scale(new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), Random.Range(0f, 2f)));
+        direction.x += randomAngle.x;
+        direction.y += randomAngle.y;
+        direction.z += randomAngle.z;
 
         Ray projectile = new Ray(thisEntityPosition, direction);
 
@@ -66,7 +74,20 @@ public class shootProjectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        if(targetSighted == true)
+        {
+            float timer = 1f;
+
+            while(targetSighted == true && timer > 0f)
+            {
+                timer -= Time.fixedDeltaTime;
+            }
+
+            if(targetSighted == true && timer <= 0f)
+            {
+                Shoot(target);
+            }
+        }
 
            
     }
