@@ -4,31 +4,27 @@ using UnityEngine;
 
 public class TargetingController : MonoBehaviour
 {
+
+    private List<GameObject> enemyUnits = new List<GameObject>();
+    private GameObject currentEntity;
+    private Vector3 currentEntityPosition;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] playerUnits = new GameObject[1000];
-        GameObject[] enemyUnits = new GameObject[1000];
-
-        foreach(GameObject pUnit in playerUnits)
-        {
-            foreach(GameObject eUnit in enemyUnits)
-            {
-                float distance = Vector3.Distance(pUnit.transform.position, eUnit.transform.position);
-
-                if(distance <= 10000f)
-                {
-                    pUnit.SendMessage("setTarget", eUnit);
-                    eUnit.SendMessage("setTarget", pUnit);
-                }
-            }
-        }
-
+        currentEntity = gameObject;
+        currentEntityPosition = currentEntity.transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        foreach(Collider entity in Physics.OverlapSphere(currentEntityPosition, 50f))
+        {
+            if(entity.gameObject.tag == "EnemyUnits")
+            {
+                enemyUnits.Add(entity.gameObject);
+            }
+        }
     }
 }
