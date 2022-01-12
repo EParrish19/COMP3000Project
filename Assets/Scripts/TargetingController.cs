@@ -6,24 +6,37 @@ public class TargetingController : MonoBehaviour
 {
 
     private List<GameObject> enemyUnits = new List<GameObject>();
-    private GameObject currentEntity;
-    private Vector3 currentEntityPosition;
+    private List<GameObject> friendlyUnits;
+    private List<Vector3> friendlyPositions;
+    private int[] enemyDistances;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentEntity = gameObject;
-        currentEntityPosition = currentEntity.transform.position;
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        foreach(Collider entity in Physics.OverlapSphere(currentEntityPosition, 50f))
+        foreach(GameObject friendly in GameObject.FindGameObjectsWithTag("FriendlyUnits"))
         {
-            if(entity.gameObject.tag == "EnemyUnits")
+            friendlyUnits.Add(friendly);
+        }
+
+        foreach(GameObject unit in friendlyUnits)
+        {
+            friendlyPositions.Add(unit.transform.position);
+        }
+
+        foreach (Vector3 friendlyPosition in friendlyPositions)
+        {
+            foreach (Collider entity in Physics.OverlapSphere(friendlyPosition, 50f))
             {
-                enemyUnits.Add(entity.gameObject);
+                if (entity.gameObject.tag == "EnemyUnits")
+                {
+                    enemyUnits.Add(entity.gameObject);
+                }
             }
         }
     }
