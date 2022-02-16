@@ -5,12 +5,21 @@ using Pathfinding;
 
 public class clickMovement : MonoBehaviour
 {
+    private GameObject selectedCharacter;
+    private AIDestinationSetter characterPathfinding;
+    private Seeker seeker;
+
+    [SerializeField]
+    private GameObject moveTargetPrefab;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject selectedCharacter = GameObject.Find("Player");
-        AIDestinationSetter characterPathfinding = selectedCharacter.GetComponent<AIDestinationSetter>();
-        Seeker seeker = selectedCharacter.GetComponent<Seeker>();
+        selectedCharacter = GameObject.Find("Player");
+        characterPathfinding = selectedCharacter.GetComponent<AIDestinationSetter>();
+        seeker = selectedCharacter.GetComponent<Seeker>();
+        moveTargetPrefab = Resources.Load<GameObject>("Prefabs/moveTarget");
     }
 
     // Update is called once per frame
@@ -24,6 +33,9 @@ public class clickMovement : MonoBehaviour
 
             if (Physics.Raycast(ray, out orderLocation))
             {
+                GameObject newMoveTarget = Instantiate(moveTargetPrefab);
+                newMoveTarget.transform.position = orderLocation.point;
+                characterPathfinding.target = newMoveTarget.transform;
                 
             }
         }

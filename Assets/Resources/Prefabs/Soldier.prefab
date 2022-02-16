@@ -109,7 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e4c694d0ecca744a41f0ff0e3e41ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!1 &6605053318113702967
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +122,7 @@ GameObject:
   - component: {fileID: 6605053318113702961}
   - component: {fileID: 6605053318113702966}
   - component: {fileID: 5176468168785161472}
+  - component: {fileID: 9190650794043658620}
   - component: {fileID: 6134997356944900286}
   m_Layer: 0
   m_Name: Soldier
@@ -223,6 +223,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+--- !u!114 &9190650794043658620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6605053318113702967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e51cafb265f74499e5ad5179db1b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTargetPrefab: {fileID: 0}
 --- !u!114 &6134997356944900286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,4 +248,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e4c694d0ecca744a41f0ff0e3e41ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
