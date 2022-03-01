@@ -12,6 +12,8 @@ public class shootProjectile : MonoBehaviour
     private GameObject thisEntity;
     private GameObject target;
 
+    private float timer = 1.0f;
+
     //on start, stores the current gameobject as a variable
     private void Start()
     {
@@ -74,18 +76,18 @@ public class shootProjectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(targetSighted == true)
+        if (targetSighted)
         {
-            float timer = 1f;
-
-            while(targetSighted == true && timer > 0f)
-            {
-                timer -= Time.fixedDeltaTime;
-            }
-
-            if(targetSighted == true && timer <= 0f)
+            
+            
+            if(timer <= 0.0f)
             {
                 Shoot(target);
+                timer = 1.0f;
+            }
+            else
+            {
+                timer -= Time.deltaTime;
             }
         }
 
