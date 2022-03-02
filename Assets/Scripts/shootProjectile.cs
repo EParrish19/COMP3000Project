@@ -12,6 +12,8 @@ public class shootProjectile : MonoBehaviour
     private GameObject thisEntity;
     private GameObject target;
 
+    public float damage;
+
     private float timer = 1.0f;
 
     //on start, stores the current gameobject as a variable
@@ -59,6 +61,7 @@ public class shootProjectile : MonoBehaviour
                 {
                     Debug.Log("Target hit");
                     Debug.DrawRay(thisEntityPosition, projectile.direction * 10, Color.yellow, 10f);
+                    targetHit.transform.gameObject.SendMessage("takeDamage", damage);
                 }
                 else
                 {

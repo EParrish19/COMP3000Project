@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 670555787}
   - component: {fileID: 670555786}
   - component: {fileID: 670555785}
+  - component: {fileID: 670555789}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -307,6 +308,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 60.412, z: 0}
+--- !u!114 &670555789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670555784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d843ff63f16e0424fb4f5360b82b56f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &671885999
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,6 +1007,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 670555784}
+    - target: {fileID: 6134997356944900286, guid: c170010d60fc35e4faef558407f380e4, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6605053318113702963, guid: c170010d60fc35e4faef558407f380e4, type: 3}
       propertyPath: m_RootOrder
       value: 3
