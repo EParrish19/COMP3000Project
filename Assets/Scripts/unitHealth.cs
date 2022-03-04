@@ -8,6 +8,9 @@ public class unitHealth : MonoBehaviour
 
     public float health;
 
+    [SerializeField]
+    private GameObject victoryScreen;
+
     void takeDamage(float damage)
     {
         health -= damage;
@@ -19,6 +22,7 @@ public class unitHealth : MonoBehaviour
 
     void die()
     {
+        victoryScreen.SetActive(true);
         gameObject.SetActive(false);
     }
 }

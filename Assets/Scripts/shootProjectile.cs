@@ -14,6 +14,7 @@ public class shootProjectile : MonoBehaviour
 
     public float damage;
 
+    [SerializeField]
     private float timer = 1.0f;
 
     //on start, stores the current gameobject as a variable
