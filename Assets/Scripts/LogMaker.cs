@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Text;
 
 public class LogMaker : MonoBehaviour
 {
@@ -10,22 +11,16 @@ public class LogMaker : MonoBehaviour
 
     private float timeTaken = 0.0f;
 
-    private StreamWriter logFile;
+    private FileStream fs;
 
     // Start is called before the first frame update
     void Start()
     {
-        logFilePath = Application.persistentDataPath + "/testLog " + System.DateTime.Now.Date + ".txt";
+        string testDate = System.DateTime.Today.Day + " " + System.DateTime.Today.Month + " " + System.DateTime.Today.Year;
 
-        if (File.Exists(logFilePath))
-        {
-            logFile = new StreamWriter(logFilePath);
-        }
-        else
-        {
-            File.Create(logFilePath);
-            logFile = new StreamWriter(logFilePath);
-        }
+        logFilePath = Application.persistentDataPath + "/testLog " + testDate + ".txt";
+
+        fs = File.Open(logFilePath, FileMode.OpenOrCreate);
     }
 
     // Update is called once per frame
@@ -37,8 +32,9 @@ public class LogMaker : MonoBehaviour
     //save time to file
     void saveFile()
     {
-        logFile.WriteLine(System.DateTime.Now.TimeOfDay + " Time: " + timeTaken);
-        logFile.WriteLine("");
-        logFile.Close();
+        Debug.Log("Saving Test Log to: " + logFilePath);
+        byte[] info = new UTF8Encoding(true).GetBytes(System.DateTime.Now.TimeOfDay + " Time Taken: " + timeTaken + "seconds");
+        fs.Write(info, (int)fs.Length, info.Length);
+        fs.Close();
     }
 }

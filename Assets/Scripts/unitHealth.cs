@@ -11,6 +11,10 @@ public class unitHealth : MonoBehaviour
     [SerializeField]
     private GameObject victoryScreen;
 
+    [SerializeField]
+    private GameObject logMaker;
+
+
     void takeDamage(float damage)
     {
         health -= damage;
@@ -24,5 +28,6 @@ public class unitHealth : MonoBehaviour
     {
         victoryScreen.SetActive(true);
         gameObject.SetActive(false);
+        logMaker.SendMessage("saveFile");
     }
 }
