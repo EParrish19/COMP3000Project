@@ -15,12 +15,17 @@ public class shootProjectile : MonoBehaviour
     public float damage;
 
     [SerializeField]
-    private float timer = 1.0f;
+    private float timer;
+
+    private float timerStart;
+
+    
 
     //on start, stores the current gameobject as a variable
     private void Start()
     {
         thisEntity = gameObject;
+        timerStart = timer;
     }
 
     public void setTargetSighted(bool targetInSight)
@@ -41,7 +46,7 @@ public class shootProjectile : MonoBehaviour
         Vector3 targetPosition = target.transform.position;
         Vector3 direction = (targetPosition - thisEntityPosition).normalized;
 
-        Vector3 randomAngle = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), Random.Range(0f, 15f));
+        Vector3 randomAngle = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(0.0f, 7.0f));
         randomAngle = randomAngle.normalized;
 
         direction.x += randomAngle.x;
@@ -87,7 +92,7 @@ public class shootProjectile : MonoBehaviour
             if(timer <= 0.0f)
             {
                 Shoot(target);
-                timer = 1.0f;
+                timer = timerStart;
             }
             else
             {

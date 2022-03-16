@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Text;
+using System;
 
 public class LogMaker : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class LogMaker : MonoBehaviour
     void saveFile()
     {
         Debug.Log("Saving Test Log to: " + logFilePath);
-        byte[] info = new UTF8Encoding(true).GetBytes(System.DateTime.Now.TimeOfDay + " Time Taken: " + timeTaken + "seconds");
+        byte[] info = new UTF8Encoding(true).GetBytes(System.DateTime.Now.TimeOfDay + " Time Taken: " + timeTaken + " seconds" + Environment.NewLine);
         fs.Write(info, (int)fs.Length, info.Length);
         fs.Close();
     }
