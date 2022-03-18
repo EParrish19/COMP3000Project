@@ -9,6 +9,7 @@ public class VictoryScreen : MonoBehaviour
     public void goToMenu()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        
     }
 
 }
