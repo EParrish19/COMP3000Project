@@ -19,7 +19,24 @@ public class shootProjectile : MonoBehaviour
 
     private float timerStart;
 
-    
+    public unitWeapon(float damage, float rate, Vector3 accuracyRange, bool burst)
+    {
+        float gunDamage = damage;
+        float fireRate = rate;
+        Vector3 RandomAccuracy = accuracyRange;
+        bool burstFire = burst;
+
+        int burstLength;
+
+        if (burst)
+        {
+            burstLength = 3;
+        }
+        else
+        {
+            burstLength = 1;
+        }
+    }
 
     //on start, stores the current gameobject as a variable
     private void Start()
