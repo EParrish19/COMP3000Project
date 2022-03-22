@@ -11,6 +11,9 @@ public class deathTracker : MonoBehaviour
     [SerializeField]
     private GameObject logMaker;
 
+    [SerializeField]
+    private GameObject UI;
+
     private int enemyNumber;
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,7 @@ public class deathTracker : MonoBehaviour
         if(enemyNumber < 1)
         {
             victoryScreen.SetActive(true);
+            UI.SetActive(false);
             logMaker.SendMessage("saveFile");
         }
     }

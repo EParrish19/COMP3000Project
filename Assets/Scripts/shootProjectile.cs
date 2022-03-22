@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class shootProjectile : MonoBehaviour
 {
@@ -12,13 +13,16 @@ public class shootProjectile : MonoBehaviour
     private GameObject thisEntity;
     private GameObject target;
 
-    private unitWeapon autoRifle = new unitWeapon(10.0f, 0.2f, 2.5f, 1);
-    private unitWeapon rifle = new unitWeapon(33.0f, 1.0f, 0.5f, 1);
-    private unitWeapon burstRifle = new unitWeapon(20.0f, 0.5f, 1.0f, 3);
+    private unitWeapon autoRifle = new unitWeapon("Auto Rifle", 10.0f, 0.2f, 2.5f, 1);
+    private unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", 33.0f, 1.0f, 0.5f, 1);
+    private unitWeapon burstRifle = new unitWeapon("Burst Rifle" ,20.0f, 0.5f, 1.0f, 3);
 
     private unitWeapon[] unitWeapons = new unitWeapon[3];
 
     private unitWeapon currentWeapon;
+
+    [SerializeField]
+    private Text weaponIndicator;
 
     private int currentWeaponIndex = 0;
 
@@ -27,13 +31,15 @@ public class shootProjectile : MonoBehaviour
     //Class and constructor for different unit weapons
      class unitWeapon
     {
+        public string weaponName;
         public float weaponDamage;
         public float fireTime;
         public float accuracyRange;
         public int burstLength;
 
-        public unitWeapon(float newWeaponDamage, float newWeaponfireTime, float newWeaponAccuracyRange, int newWeaponBurstLength)
+        public unitWeapon(string newWeaponName, float newWeaponDamage, float newWeaponfireTime, float newWeaponAccuracyRange, int newWeaponBurstLength)
         {
+            weaponName = newWeaponName;
             weaponDamage = newWeaponDamage;
             fireTime = newWeaponfireTime;
             accuracyRange = newWeaponAccuracyRange;
@@ -54,6 +60,10 @@ public class shootProjectile : MonoBehaviour
 
         timer = currentWeapon.fireTime;
 
+        weaponIndicator = GameObject.Find("UIElements").GetComponentInChildren<Text>();
+
+        weaponIndicator.text = "Current Weapon: " + currentWeapon.weaponName;
+
     }
 
     public void setTargetSighted(bool targetInSight)
@@ -72,11 +82,15 @@ public class shootProjectile : MonoBehaviour
         {
             currentWeaponIndex = 0;
             currentWeapon = unitWeapons[currentWeaponIndex];
+            weaponIndicator.text = "Current Weapon: " + currentWeapon.weaponName;
+            Debug.Log(("Swapping weapon to {0}.", currentWeapon.weaponName));
         }
         else
         {
             currentWeaponIndex += 1;
             currentWeapon = unitWeapons[currentWeaponIndex];
+            weaponIndicator.text = "Current Weapon: " + currentWeapon.weaponName;
+            Debug.Log(("Swapping weapon to {0}.", currentWeapon.weaponName));
         }
     }
 
