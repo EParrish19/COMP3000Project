@@ -12,6 +12,10 @@ public class shootProjectile : MonoBehaviour
     private GameObject thisEntity;
     private GameObject target;
 
+    private unitWeapon autoRifle = new unitWeapon(10.0f, 0.2f, 2.5f, false);
+    private unitWeapon rifle = new unitWeapon(33.0f, 1.0f, 0.5f, false);
+    private unitWeapon burstRifle = new unitWeapon(20.0f, 0.5f, 1.0f, true);
+
     public float damage;
 
     [SerializeField]
@@ -19,22 +23,31 @@ public class shootProjectile : MonoBehaviour
 
     private float timerStart;
 
-    public unitWeapon(float damage, float rate, Vector3 accuracyRange, bool burst)
+    //Class and constructor for different unit weapons
+     class unitWeapon
     {
-        float gunDamage = damage;
-        float fireRate = rate;
-        Vector3 RandomAccuracy = accuracyRange;
-        bool burstFire = burst;
+        public float weaponDamage;
+        public float fireTime;
+        public float accuracyRange;
+        public bool burstFire;
+        public int burstLength;
 
-        int burstLength;
+        public unitWeapon(float newWeaponDamage, float newWeaponfireTime, float newWeaponAccuracyRange, bool isBurstFire)
+        {
+            weaponDamage = newWeaponDamage;
+            fireTime = newWeaponfireTime;
+            accuracyRange = newWeaponAccuracyRange;
+            burstFire = isBurstFire;
 
-        if (burst)
-        {
-            burstLength = 3;
-        }
-        else
-        {
-            burstLength = 1;
+            //if the weapon is set to be burst fire (3-shot then wait before firing) then set the burst length to reflect that
+            if (burstFire)
+            {
+                burstLength = 3;
+            }
+            else
+            {
+                burstLength = 1;
+            }
         }
     }
 
@@ -43,6 +56,8 @@ public class shootProjectile : MonoBehaviour
     {
         thisEntity = gameObject;
         timerStart = timer;
+
+
     }
 
     public void setTargetSighted(bool targetInSight)
