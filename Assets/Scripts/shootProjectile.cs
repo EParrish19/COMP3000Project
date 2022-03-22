@@ -16,9 +16,14 @@ public class shootProjectile : MonoBehaviour
     private unitWeapon rifle = new unitWeapon(33.0f, 1.0f, 0.5f, false);
     private unitWeapon burstRifle = new unitWeapon(20.0f, 0.5f, 1.0f, true);
 
-    public float damage;
+    private unitWeapon[] unitWeapons = new unitWeapon[3];
 
-    [SerializeField]
+    private unitWeapon currentWeapon;
+
+    private int currentWeaponIndex = 0;
+
+    private float damage;
+
     private float timer;
 
     private float timerStart;
@@ -57,6 +62,11 @@ public class shootProjectile : MonoBehaviour
         thisEntity = gameObject;
         timerStart = timer;
 
+        unitWeapons[0] = autoRifle;
+        unitWeapons[1] = rifle;
+        unitWeapons[2] = burstRifle;
+
+        currentWeapon = unitWeapons[0];
 
     }
 
@@ -68,6 +78,34 @@ public class shootProjectile : MonoBehaviour
     public void setTarget(GameObject newTarget)
     {
         target = newTarget;
+    }
+
+    public void nextWeapon()
+    {
+        if (currentWeaponIndex == unitWeapons.Length - 1)
+        {
+            currentWeaponIndex = 0;
+            currentWeapon = unitWeapons[currentWeaponIndex];
+        }
+        else
+        {
+            currentWeaponIndex += 1;
+            currentWeapon = unitWeapons[currentWeaponIndex];
+        }
+    }
+
+    public void previousWeapon()
+    {
+        if(currentWeaponIndex == 0)
+        {
+            currentWeaponIndex = unitWeapons.Length - 1;
+            currentWeapon = unitWeapons[currentWeaponIndex];
+        }
+        else
+        {
+            currentWeaponIndex -= 1;
+            currentWeapon = unitWeapons[currentWeaponIndex];
+        }
     }
 
 
