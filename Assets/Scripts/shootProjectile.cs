@@ -12,9 +12,9 @@ public class shootProjectile : MonoBehaviour
     private GameObject thisEntity;
     private GameObject target;
 
-    private unitWeapon autoRifle = new unitWeapon(10.0f, 0.2f, 2.5f, false);
-    private unitWeapon rifle = new unitWeapon(33.0f, 1.0f, 0.5f, false);
-    private unitWeapon burstRifle = new unitWeapon(20.0f, 0.5f, 1.0f, true);
+    private unitWeapon autoRifle = new unitWeapon(10.0f, 0.2f, 2.5f, 1);
+    private unitWeapon rifle = new unitWeapon(33.0f, 1.0f, 0.5f, 1);
+    private unitWeapon burstRifle = new unitWeapon(20.0f, 0.5f, 1.0f, 3);
 
     private unitWeapon[] unitWeapons = new unitWeapon[3];
 
@@ -22,11 +22,7 @@ public class shootProjectile : MonoBehaviour
 
     private int currentWeaponIndex = 0;
 
-    private float damage;
-
     private float timer;
-
-    private float timerStart;
 
     //Class and constructor for different unit weapons
      class unitWeapon
@@ -34,25 +30,14 @@ public class shootProjectile : MonoBehaviour
         public float weaponDamage;
         public float fireTime;
         public float accuracyRange;
-        public bool burstFire;
         public int burstLength;
 
-        public unitWeapon(float newWeaponDamage, float newWeaponfireTime, float newWeaponAccuracyRange, bool isBurstFire)
+        public unitWeapon(float newWeaponDamage, float newWeaponfireTime, float newWeaponAccuracyRange, int newWeaponBurstLength)
         {
             weaponDamage = newWeaponDamage;
             fireTime = newWeaponfireTime;
             accuracyRange = newWeaponAccuracyRange;
-            burstFire = isBurstFire;
-
-            //if the weapon is set to be burst fire (3-shot then wait before firing) then set the burst length to reflect that
-            if (burstFire)
-            {
-                burstLength = 3;
-            }
-            else
-            {
-                burstLength = 1;
-            }
+            burstLength = newWeaponBurstLength;
         }
     }
 
@@ -60,13 +45,14 @@ public class shootProjectile : MonoBehaviour
     private void Start()
     {
         thisEntity = gameObject;
-        timerStart = timer;
 
         unitWeapons[0] = autoRifle;
         unitWeapons[1] = rifle;
         unitWeapons[2] = burstRifle;
 
         currentWeapon = unitWeapons[0];
+
+        timer = currentWeapon.fireTime;
 
     }
 
@@ -116,7 +102,7 @@ public class shootProjectile : MonoBehaviour
         Vector3 targetPosition = target.transform.position;
         Vector3 direction = (targetPosition - thisEntityPosition).normalized;
 
-        Vector3 randomAngle = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(0.0f, 7.0f));
+        Vector3 randomAngle = new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange));
         randomAngle = randomAngle.normalized;
 
         direction.x += randomAngle.x;
@@ -137,7 +123,7 @@ public class shootProjectile : MonoBehaviour
                 {
                     Debug.Log("Target hit");
                     Debug.DrawRay(thisEntityPosition, projectile.direction * 10, Color.yellow, 10f);
-                    targetHit.transform.gameObject.SendMessage("takeDamage", damage);
+                    targetHit.transform.gameObject.SendMessage("takeDamage", currentWeapon.weaponDamage);
                 }
                 else
                 {
@@ -161,8 +147,13 @@ public class shootProjectile : MonoBehaviour
             
             if(timer <= 0.0f)
             {
-                Shoot(target);
-                timer = timerStart;
+                for (int i = 0; i <= currentWeapon.burstLength; i++)
+                {
+                    Shoot(target);
+                }
+
+
+                timer = currentWeapon.fireTime;
             }
             else
             {
