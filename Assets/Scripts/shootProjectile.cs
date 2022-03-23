@@ -83,14 +83,14 @@ public class shootProjectile : MonoBehaviour
             currentWeaponIndex = 0;
             currentWeapon = unitWeapons[currentWeaponIndex];
             weaponIndicator.text = "Current Weapon: " + currentWeapon.weaponName;
-            Debug.Log(("Swapping weapon to {0}.", currentWeapon.weaponName));
+            Debug.Log("Swapping weapon to " + currentWeapon.weaponName);
         }
         else
         {
             currentWeaponIndex += 1;
             currentWeapon = unitWeapons[currentWeaponIndex];
             weaponIndicator.text = "Current Weapon: " + currentWeapon.weaponName;
-            Debug.Log(("Swapping weapon to {0}.", currentWeapon.weaponName));
+            Debug.Log("Swapping weapon to " + currentWeapon.weaponName);
         }
     }
 
@@ -116,7 +116,26 @@ public class shootProjectile : MonoBehaviour
         Vector3 targetPosition = target.transform.position;
         Vector3 direction = (targetPosition - thisEntityPosition).normalized;
 
-        Vector3 randomAngle = new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange));
+        Vector3 randomAngle;
+
+        if(thisEntityPosition.y > targetPosition.y)
+        {
+            float advantagedAccuracyRange = currentWeapon.accuracyRange / 2;
+
+            randomAngle = new Vector3(Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(0.0f, advantagedAccuracyRange));
+        }else if(thisEntityPosition.y < targetPosition.y)
+        {
+            float disadvantagedAccuracyRange = currentWeapon.accuracyRange * 2;
+
+            randomAngle = new Vector3(Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(0.0f, disadvantagedAccuracyRange));
+        }
+        else
+        {
+            randomAngle = new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange));
+        }
+
+
+        
         randomAngle = randomAngle.normalized;
 
         direction.x += randomAngle.x;

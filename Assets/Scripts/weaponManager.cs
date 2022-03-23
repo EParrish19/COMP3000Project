@@ -17,12 +17,12 @@ public class weaponManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.Period))
         {
             unitShootProjectile.nextWeapon();
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.Comma))
         {
             unitShootProjectile.previousWeapon();
         }
