@@ -28,6 +28,8 @@ public class shootProjectile : MonoBehaviour
 
     private float timer;
 
+    private LineRenderer shotTracer;
+
     //Class and constructor for different unit weapons
      class unitWeapon
     {
@@ -63,6 +65,12 @@ public class shootProjectile : MonoBehaviour
         weaponIndicator = GameObject.Find("UIElements").GetComponentInChildren<Text>();
 
         weaponIndicator.text = "Current Weapon: " + currentWeapon.weaponName;
+
+        shotTracer = gameObject.GetComponentInChildren<LineRenderer>();
+
+        shotTracer.startColor = Color.white;
+
+        
 
     }
 
@@ -156,12 +164,24 @@ public class shootProjectile : MonoBehaviour
                 {
                     Debug.Log("Target hit");
                     Debug.DrawRay(thisEntityPosition, projectile.direction * 10, Color.yellow, 10f);
+                    shotTracer.endColor = Color.yellow;
+
+                    shotTracer.SetPosition(0, gameObject.transform.position);
+                    shotTracer.SetPosition(1, targetHit.point);
+                    Invoke("resetTracer", currentWeapon.fireTime);
+                    
+
                     targetHit.transform.gameObject.SendMessage("takeDamage", currentWeapon.weaponDamage);
                 }
                 else
                 {
                     Debug.Log("Target Missed");
                     Debug.DrawRay(thisEntityPosition, projectile.direction * 10, Color.blue, 10f);
+                    shotTracer.endColor = Color.blue;
+
+                    shotTracer.SetPosition(0, gameObject.transform.position);
+                    shotTracer.SetPosition(1, targetHit.point);
+                    Invoke("resetTracer", currentWeapon.fireTime);
                 }
 
 
@@ -195,6 +215,11 @@ public class shootProjectile : MonoBehaviour
         }
 
            
+    }
+
+    void resetTracer()
+    {
+        shotTracer.SetPosition(1, gameObject.transform.position);
     }
 }
 
