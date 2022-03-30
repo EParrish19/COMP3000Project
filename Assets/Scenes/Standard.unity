@@ -202,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9032358095105751067, guid: 25659cdc492650649bb4fef321105411, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.135253
+      value: -10.73
       objectReference: {fileID: 0}
     - target: {fileID: 9032358095105751067, guid: 25659cdc492650649bb4fef321105411, type: 3}
       propertyPath: m_LocalPosition.y
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAAIez42XQ1bAIAACcFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1zmzAQ/SsenWsPGIiT3lriOD0k9sTt5MJFRovRWEiMPuKPjP97JSEb6kxPMLvvvd23u/CJKFctlFrIhaTkRRBA30fIvaNvoz75DAe8FXxNT3DBvFOiawfCHvOGNRU2HjuaEg1oScsffMscOLJBw2klZDMnW8iF0sqGK8wU2JQU2rG5DX2O0CEQjuF5cs/R2b6VwDXIHjVOJnEaJenDXRLw42gSB8p4NsmyJI6yJPNkw0uGmxaIM9FrTLNATbsa3NoLiGjicqVgjKrQHdLH1rvPcauM9WYBhGLr1vfl2qiBbmvtlIfkZVUp0MGRxMdHKu3QOlX0U3STbLDadZ19YGZcnXh677vqRF++5O9Sn66kaJ4vdePI1dA1LXdv+FhipQejHoYf+8ZjP6A9Zju8YfBeA38VCykMJzappXFUo2D6OJC6estrKHc9ruv1Jmjar8uN++WevftDzmiz8ZNPu8CaCT/vB8cBaXfzyzbsj0UFJRt1TfxR8Btvh1cVEk9UKm1ToSB33W2EkQ6K5n5mzozRuZAc5FChBY6ZPq6sjr7d4U3u/6wn7D6gUD3kLt/FDcWHe3wU3aRWYn/dlqrF/gVUvTSaUQ79pF3i1Q4qF5x3Jza0dKGtjaxwOaBtDSX/3hYCUsbpJsGzLKuye5KOs1kyi+/uq031sKlm0wr546Pc+sRs1TUaxmPXxntxbg/t8l8ZLSRu/bkTifcLemqE6pGUV2JdSgC+7BSujYO0ReyHSeaE2gGtQWvK/cLRZ4GYKHdAiqtQ4Z3OD1riolcpUEs/hHaRAuX+b1IgF77e8krCB4W9K34RO6PzX1BLAwQUAAAICAAAACHs495MXm0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0UmpKsqFJknGiualpmqlFiomuqbmxuaGZRVpSmmVSmrlRmlIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAACHs+Nl0NWwCAAAnBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAACHs495MXm0AAAB4AAAACQAkAAAAAAAAAAAAAAC5AgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAHEDAAAAAA==
+    dataString: UEsDBBQAAAgIAAAAIezlQymEawIAACYFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VMFy2jAQ/RVG58LYxoSkt9YhpIckTGgnF1+EtcYaZMkjyQGS4d+7kgV2yfSEebvv7b7dtT8Jl6aBwiq91Jw9KQbk+4i4Z/Jt1Acf4UC3Sq75B5xz3jizlUuiPueVWq4Qjx3NqBqs5sUPuRUuOUKwlbxUul6wLWTKWINwSYUBDGllHVsi9Dkih0A4ht8P9zs64VMB0oLus8bTSZxG03Q+T0L+OJrEgZLcTO7SKIlvPbWVhaB1A8xZ6BWSWSDGUVdCoruQEk1csFBCcBOaI/bYePMZbUyL1jCBcYpmfVtT/FsB31bWSQ/JL2VpwAZDmh7vucaZdarkp+oGWVOz61p7p6J1deKk674TffoSv0l9uNSqfjzXRScI2YoXu1d6LKixg0kP4fu+8dhPaE/Fjm4EvFUgn9VSq1YyDFrdOmprILkfSF28ZRUUuz6v6/UKbJuvu4373Z68+0MmeL3xk087YC2Un/ed44DG3fzChv2tmKCEqGvij4HfdDs8qhB44NpYDIWC0nW3Ua12qWThZ+bMtDZTWoIeKjQgqbDHFerY6x1exf7PeqDu/QnVQ+z8WlxRPNznR9FVaKX2l22ZSu2fwFQvrRVcQj9pF3jGQWVKyu7EhpbOtHWrS1oMaNuWs39viwAr4nQzpfPZrJzdsnQ8m0/n8c1tuSnvNuU8KYk/Pi7RJxWrrtEwHlyb7MUlHtr5szJaatr4c2ea7pf8o1amz+SyVOtCA8iXTuHSOGgsgi8mWzCOA1qDtVz6hZPPnAhV7IDlF6HcO10crKZ5r5KThr8r65CcZP5jkhMHX255peGdw94VP4udyOkvUEsDBBQAAAgIAAAAIezj3kxebQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrRSakqyoUmScaK5qWmaqUWKia6pubG5oZlFWlKaZVKauVGaUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAAAAIezlQymEawIAACYFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAAAAIezj3kxebQAAAHgAAAAJACQAAAAAAAAAAAAAALgCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAcAMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -922,7 +922,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371009245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.82487, y: -10.987756, z: -8.24}
+  m_LocalPosition: {x: -9.82487, y: -10.987756, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1038,7 +1038,7 @@ GameObject:
   - component: {fileID: 484003855}
   - component: {fileID: 484003854}
   - component: {fileID: 484003853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1576,7 +1576,7 @@ GameObject:
   - component: {fileID: 503166676}
   - component: {fileID: 503166675}
   - component: {fileID: 503166674}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2447,7 +2447,7 @@ GameObject:
   - component: {fileID: 695926580}
   - component: {fileID: 695926579}
   - component: {fileID: 695926578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3711,7 +3711,7 @@ GameObject:
   - component: {fileID: 1009231486}
   - component: {fileID: 1009231485}
   - component: {fileID: 1009231484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6271,7 +6271,7 @@ GameObject:
   - component: {fileID: 1718788523}
   - component: {fileID: 1718788522}
   - component: {fileID: 1718788521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stairs (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6715,7 +6715,7 @@ GameObject:
   - component: {fileID: 1904463434}
   - component: {fileID: 1904463433}
   - component: {fileID: 1904463432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7721,7 +7721,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7753,7 +7753,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.25
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -7762,7 +7762,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.25625038
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -7823,7 +7823,7 @@ GameObject:
   - component: {fileID: 2062825037}
   - component: {fileID: 2062825036}
   - component: {fileID: 2062825035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
