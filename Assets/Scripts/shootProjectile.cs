@@ -13,11 +13,11 @@ public class shootProjectile : MonoBehaviour
     private GameObject thisEntity;
     private GameObject target;
 
-    private unitWeapon autoRifle = new unitWeapon("Auto Rifle", 10.0f, 0.2f, 2.5f, 1);
-    private unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", 33.0f, 1.0f, 0.5f, 1);
-    private unitWeapon burstRifle = new unitWeapon("Burst Rifle" ,20.0f, 0.5f, 1.0f, 3);
+    public unitWeapon autoRifle = new unitWeapon("Auto Rifle", 10.0f, 0.2f, 0.5f);
+    public unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", 33.0f, 1.0f, 0.1f);
+    public unitWeapon burstRifle = new unitWeapon("Burst Rifle" ,20.0f, 0.5f, 0.2f, 3);
 
-    private unitWeapon[] unitWeapons = new unitWeapon[3];
+    public unitWeapon[] unitWeapons = new unitWeapon[3];
 
     private unitWeapon currentWeapon;
 
@@ -31,7 +31,7 @@ public class shootProjectile : MonoBehaviour
     private LineRenderer shotTracer;
 
     //Class and constructor for different unit weapons
-     class unitWeapon
+public class unitWeapon
     {
         public string weaponName;
         public float weaponDamage;
@@ -46,6 +46,15 @@ public class shootProjectile : MonoBehaviour
             fireTime = newWeaponfireTime;
             accuracyRange = newWeaponAccuracyRange;
             burstLength = newWeaponBurstLength;
+        }
+
+        public unitWeapon(string newWeaponName, float newWeaponDamage, float newWeaponFireTime, float newWeaponAccuracyRange)
+        {
+            weaponName = newWeaponName;
+            weaponDamage = newWeaponDamage;
+            fireTime = newWeaponFireTime;
+            accuracyRange = newWeaponAccuracyRange;
+            burstLength = 1;
         }
     }
 
@@ -130,16 +139,16 @@ public class shootProjectile : MonoBehaviour
         {
             float advantagedAccuracyRange = currentWeapon.accuracyRange / 2;
 
-            randomAngle = new Vector3(Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(0.0f, advantagedAccuracyRange));
+            randomAngle = new Vector3(Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(0.0f, advantagedAccuracyRange), Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange));
         }else if(thisEntityPosition.y < targetPosition.y)
         {
             float disadvantagedAccuracyRange = currentWeapon.accuracyRange * 2;
 
-            randomAngle = new Vector3(Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(0.0f, disadvantagedAccuracyRange));
+            randomAngle = new Vector3(Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(0.0f, disadvantagedAccuracyRange), Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange));
         }
         else
         {
-            randomAngle = new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange));
+            randomAngle = new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange));
         }
 
 
@@ -150,6 +159,53 @@ public class shootProjectile : MonoBehaviour
         direction.y += randomAngle.y;
         direction.z += randomAngle.z;
 
+        direction = direction.normalized;
+
+        /*float xSpread;
+        float ySpread;
+        float zSpread;
+        float coneSize;
+
+        if(thisEntityPosition.y > targetPosition.y)
+        {
+            float advantagedAccuracyRange = currentWeapon.accuracyRange / 2;
+
+            coneSize = advantagedAccuracyRange;
+
+            xSpread = Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange);
+
+            ySpread = Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange);
+
+            zSpread = Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange);
+
+        }else if(thisEntityPosition.y < targetPosition.y)
+        {
+            float disadvantagedAccuracyRange = currentWeapon.accuracyRange * 2;
+
+            coneSize = disadvantagedAccuracyRange;
+
+            xSpread = Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange);
+
+            ySpread = Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange);
+
+            zSpread = Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange);
+        }
+        else
+        {
+            coneSize = currentWeapon.accuracyRange;
+
+            xSpread = Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange);
+
+            ySpread = Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange);
+
+            zSpread = Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange);
+        }
+
+        Vector3 spread = new Vector3(xSpread, ySpread, zSpread).normalized * coneSize;
+
+        Vector3 shotDirection = ((Quaternion.Euler(spread) * thisEntity.transform.rotation).eulerAngles).normalized;
+
+        Ray projectile = new Ray(thisEntityPosition, shotDirection);*/
         Ray projectile = new Ray(thisEntityPosition, direction);
 
         //only needs to run if the target is in sight

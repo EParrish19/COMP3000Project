@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6605053317336922513}
   - component: {fileID: 6605053317336922518}
   - component: {fileID: 6605053317336922519}
-  - component: {fileID: 6605053317336922516}
   - component: {fileID: 2057605527}
   m_Layer: 0
   m_Name: Gun
@@ -28,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6605053317336922522}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.32, y: 0.01999998, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0.355}
   m_LocalScale: {x: 0.9745399, y: 0.30877, z: 0.30877}
   m_Children: []
   m_Father: {fileID: 6605053318113702963}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &6605053317336922513
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -98,19 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6605053317336922516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6605053317336922522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e4c694d0ecca744a41f0ff0e3e41ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponIndicator: {fileID: 0}
 --- !u!120 &2057605527
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -254,14 +240,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6605053318113702967}
-  m_LocalRotation: {x: 0, y: -0.8717146, z: 0, w: 0.490014}
-  m_LocalPosition: {x: -0.79650724, y: 1.08, z: -9.438094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6605053317336922517}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -121.317, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6605053318113702960
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -456,7 +442,7 @@ MonoBehaviour:
   repathRateCompatibility: NaN
   canSearchCompability: 0
   orientation: 0
-  enableRotation: 1
+  enableRotation: 0
   autoRepath:
     mode: 2
     interval: 0.5

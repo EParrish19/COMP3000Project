@@ -53,6 +53,8 @@ public class sight : MonoBehaviour
                 if (targetInSight.transform.gameObject.name != null && targetInSight.transform.gameObject.name == target.name)
                 {
                     Debug.Log(targetInSight.transform.gameObject.name + " sighted by: " + thisEntity.name);
+                    thisEntity.transform.LookAt(targetPosition);
+                    thisEntity.transform.eulerAngles = new Vector3(0.0f, thisEntity.transform.eulerAngles.y - 90, 0.0f);
                     targetSighted = true;
                 }
                 else if (targetInSight.transform.gameObject.name != null)
