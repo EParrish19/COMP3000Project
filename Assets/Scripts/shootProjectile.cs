@@ -14,7 +14,7 @@ public class shootProjectile : MonoBehaviour
     private GameObject target;
 
     public unitWeapon autoRifle = new unitWeapon("Auto Rifle", 10.0f, 0.2f, 0.5f);
-    public unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", 33.0f, 1.0f, 0.1f);
+    public unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", 33.0f, 0.7f, 0.1f);
     public unitWeapon burstRifle = new unitWeapon("Burst Rifle" ,20.0f, 0.5f, 0.2f, 3);
 
     public unitWeapon[] unitWeapons = new unitWeapon[3];
@@ -131,7 +131,7 @@ public class unitWeapon
         //seperate ray for the actual projectile
         Vector3 thisEntityPosition = thisEntity.transform.position;
         Vector3 targetPosition = target.transform.position;
-        Vector3 direction = (targetPosition - thisEntityPosition).normalized;
+        /*Vector3 direction = (targetPosition - thisEntityPosition).normalized;
 
         Vector3 randomAngle;
 
@@ -159,7 +159,7 @@ public class unitWeapon
         direction.y += randomAngle.y;
         direction.z += randomAngle.z;
 
-        direction = direction.normalized;
+        //direction = direction.normalized;*/
 
         /*float xSpread;
         float ySpread;
@@ -206,7 +206,32 @@ public class unitWeapon
         Vector3 shotDirection = ((Quaternion.Euler(spread) * thisEntity.transform.rotation).eulerAngles).normalized;
 
         Ray projectile = new Ray(thisEntityPosition, shotDirection);*/
-        Ray projectile = new Ray(thisEntityPosition, direction);
+        //Ray projectile = new Ray(thisEntityPosition, direction);
+
+        Vector3 fwd = thisEntity.transform.forward;
+        
+        if(thisEntityPosition.y > targetPosition.y)
+        {
+            float advantagedAccuracyRange = currentWeapon.accuracyRange / 2;
+
+            fwd += thisEntity.transform.TransformDirection(new Vector3(
+                Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(0.0f, advantagedAccuracyRange), Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange)));
+
+        }else if(thisEntityPosition.y < targetPosition.y)
+        {
+            float disadvantagedAccuracyRange = currentWeapon.accuracyRange * 2;
+
+            fwd += thisEntity.transform.TransformDirection(new Vector3(
+                Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(0.0f, disadvantagedAccuracyRange), Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange)));
+
+        }
+        else
+        {
+            fwd += thisEntity.transform.TransformDirection(new Vector3(
+                Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange)));
+        }
+
+        Ray projectile = new Ray(thisEntityPosition, fwd);
 
         //only needs to run if the target is in sight
         if (targetSighted == true)
