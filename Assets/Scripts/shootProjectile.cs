@@ -17,6 +17,9 @@ public class shootProjectile : MonoBehaviour
     public unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", 33.0f, 0.7f, 0.1f);
     public unitWeapon burstRifle = new unitWeapon("Burst Rifle" ,20.0f, 0.5f, 0.2f, 3);
 
+    [SerializeField]
+    private AudioSource shotAudio;
+
     public unitWeapon[] unitWeapons = new unitWeapon[3];
 
     private unitWeapon currentWeapon;
@@ -276,6 +279,7 @@ public class unitWeapon
                 for (int i = 0; i <= currentWeapon.burstLength; i++)
                 {
                     Shoot(target);
+                    shotAudio.Play();
                 }
 
 
