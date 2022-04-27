@@ -25,9 +25,13 @@ public class unitHealth : MonoBehaviour
 
     void die()
     {
-        
-        gameObject.SetActive(false);
         deathTrackerObject.SendMessage("reduceEnemyNumber");
+        GameObject player = GameObject.Find("Player");
+
+        player.SendMessage("resetTarget");
+
+        gameObject.SetActive(false);
+        
         
     }
 }

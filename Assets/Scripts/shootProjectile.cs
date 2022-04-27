@@ -131,33 +131,23 @@ public class unitWeapon
         //seperate ray for the actual projectile
         Vector3 thisEntityPosition = thisEntity.transform.position;
         Vector3 targetPosition = target.transform.position;
-        /*Vector3 direction = (targetPosition - thisEntityPosition).normalized;
-
-        Vector3 randomAngle;
+        Vector3 direction = (targetPosition - thisEntityPosition).normalized;
 
         if(thisEntityPosition.y > targetPosition.y)
         {
             float advantagedAccuracyRange = currentWeapon.accuracyRange / 2;
 
-            randomAngle = new Vector3(Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(0.0f, advantagedAccuracyRange), Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange));
+            direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(0.0f, advantagedAccuracyRange), Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange)));
         }else if(thisEntityPosition.y < targetPosition.y)
         {
             float disadvantagedAccuracyRange = currentWeapon.accuracyRange * 2;
 
-            randomAngle = new Vector3(Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(0.0f, disadvantagedAccuracyRange), Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange));
+            direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(0.0f, disadvantagedAccuracyRange), Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange)));
         }
         else
         {
-            randomAngle = new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange));
+            direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange)));
         }
-
-
-        
-        randomAngle = randomAngle.normalized;
-
-        direction.x += randomAngle.x;
-        direction.y += randomAngle.y;
-        direction.z += randomAngle.z;
 
         //direction = direction.normalized;*/
 
@@ -208,7 +198,7 @@ public class unitWeapon
         Ray projectile = new Ray(thisEntityPosition, shotDirection);*/
         //Ray projectile = new Ray(thisEntityPosition, direction);
 
-        Vector3 fwd = thisEntity.transform.forward;
+        /*Vector3 fwd = thisEntity.transform.right;
         
         if(thisEntityPosition.y > targetPosition.y)
         {
@@ -231,7 +221,9 @@ public class unitWeapon
                 Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange)));
         }
 
-        Ray projectile = new Ray(thisEntityPosition, fwd);
+        Ray projectile = new Ray(thisEntityPosition, fwd);*/
+
+        Ray projectile = new Ray(thisEntityPosition, direction);
 
         //only needs to run if the target is in sight
         if (targetSighted == true)
@@ -301,6 +293,12 @@ public class unitWeapon
     void resetTracer()
     {
         shotTracer.SetPosition(1, gameObject.transform.position);
+    }
+
+    void resetTarget()
+    {
+        targetSighted = false;
+        target = null;
     }
 }
 

@@ -9,11 +9,14 @@ public class ClickTarget : MonoBehaviour
 
     private sight unitSight;
 
+    private GameObject markerPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
         selectedCharacter = GameObject.Find("Player");
         unitSight = selectedCharacter.GetComponent<sight>();
+        markerPrefab = Resources.Load<GameObject>("Prefabs/Marker");
     }
 
     // Update is called once per frame
@@ -30,6 +33,9 @@ public class ClickTarget : MonoBehaviour
                 if (targetRay.transform.gameObject.tag == "EnemyUnit")
                 {
                     unitSight.SetTarget(targetRay.transform.gameObject);
+                    GameObject targetMarker = Instantiate(markerPrefab, targetRay.transform);
+                    targetMarker.transform.position = new Vector3(targetMarker.transform.position.x, targetMarker.transform.position.y + 2, targetMarker.transform.position.z);
+                    
                 }
             }
         }
