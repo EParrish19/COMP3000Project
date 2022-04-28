@@ -11,12 +11,14 @@ public class ChangeVolume : MonoBehaviour
 
    void Start()
     {
+        source = gameObject.GetComponent<AudioSource>();
         audioMix = source.outputAudioMixerGroup.audioMixer;
     }
 
     //changes volume when slider value changes
     public void volumeChange(float newValue)
     {
+        
         audioMix.SetFloat("audioVolume", newValue);
     }
 

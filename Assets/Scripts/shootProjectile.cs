@@ -82,6 +82,8 @@ public class unitWeapon
 
         shotTracer.startColor = Color.white;
 
+        shotAudio = Camera.main.GetComponent<AudioSource>();
+
         
 
     }

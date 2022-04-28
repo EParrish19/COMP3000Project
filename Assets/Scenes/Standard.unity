@@ -4673,7 +4673,7 @@ MonoBehaviour:
   m_MinValue: -80
   m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: -20
+  m_Value: -60
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -8587,7 +8587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1934405660450854366, guid: 9b49494ff0454214cacf39ec42fcbf2f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 584.6615
+      value: 583.21
       objectReference: {fileID: 0}
     - target: {fileID: 1934405660450854366, guid: 9b49494ff0454214cacf39ec42fcbf2f, type: 3}
       propertyPath: m_LocalRotation.w
