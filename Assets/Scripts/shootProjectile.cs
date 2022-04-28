@@ -13,9 +13,11 @@ public class shootProjectile : MonoBehaviour
     private GameObject thisEntity;
     private GameObject target;
 
-    public unitWeapon autoRifle = new unitWeapon("Auto Rifle", 10.0f, 0.2f, 0.5f);
-    public unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", 33.0f, 0.7f, 0.1f);
-    public unitWeapon burstRifle = new unitWeapon("Burst Rifle" ,20.0f, 0.5f, 0.2f, 3);
+    public unitWeapon autoRifle = new unitWeapon("Auto Rifle", "fullAuto" ,10.0f, 0.2f, 0.5f);
+    public unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", "semiAuto" ,33.0f, 0.7f, 0.1f);
+    public unitWeapon burstRifle = new unitWeapon("Burst Rifle", "burst" ,20.0f, 0.5f, 0.2f, 3);
+
+    private LogMaker logger;
 
     [SerializeField]
     private AudioSource shotAudio;
@@ -41,23 +43,26 @@ public class unitWeapon
         public float fireTime;
         public float accuracyRange;
         public int burstLength;
+        public string tag;
 
-        public unitWeapon(string newWeaponName, float newWeaponDamage, float newWeaponfireTime, float newWeaponAccuracyRange, int newWeaponBurstLength)
+        public unitWeapon(string newWeaponName, string newTag ,float newWeaponDamage, float newWeaponfireTime, float newWeaponAccuracyRange, int newWeaponBurstLength)
         {
             weaponName = newWeaponName;
             weaponDamage = newWeaponDamage;
             fireTime = newWeaponfireTime;
             accuracyRange = newWeaponAccuracyRange;
             burstLength = newWeaponBurstLength;
+            tag = newTag;
         }
 
-        public unitWeapon(string newWeaponName, float newWeaponDamage, float newWeaponFireTime, float newWeaponAccuracyRange)
+        public unitWeapon(string newWeaponName, string newTag ,float newWeaponDamage, float newWeaponFireTime, float newWeaponAccuracyRange)
         {
             weaponName = newWeaponName;
             weaponDamage = newWeaponDamage;
             fireTime = newWeaponFireTime;
             accuracyRange = newWeaponAccuracyRange;
             burstLength = 1;
+            tag = newTag;
         }
     }
 
@@ -84,7 +89,7 @@ public class unitWeapon
 
         shotAudio = Camera.main.GetComponent<AudioSource>();
 
-        
+        logger = GameObject.Find("LogMaker").GetComponent<LogMaker>();
 
     }
 
@@ -247,6 +252,8 @@ public class unitWeapon
                     shotTracer.SetPosition(0, gameObject.transform.position);
                     shotTracer.SetPosition(1, targetHit.point);
                     Invoke("resetTracer", currentWeapon.fireTime);
+
+                    logger.addHit(currentWeapon.tag);
                     
 
                     targetHit.transform.gameObject.SendMessage("takeDamage", currentWeapon.weaponDamage);
@@ -260,9 +267,23 @@ public class unitWeapon
                     shotTracer.SetPosition(0, gameObject.transform.position);
                     shotTracer.SetPosition(1, targetHit.point);
                     Invoke("resetTracer", currentWeapon.fireTime);
+
+                    logger.addMiss(currentWeapon.tag);
                 }
 
 
+            }
+            else
+            {
+                Debug.Log("Target Missed");
+                Debug.DrawRay(thisEntityPosition, projectile.direction * 10, Color.blue, 10f);
+                shotTracer.endColor = Color.blue;
+
+                shotTracer.SetPosition(0, gameObject.transform.position);
+                shotTracer.SetPosition(1, projectile.direction * 10);
+                Invoke("resetTracer", currentWeapon.fireTime);
+
+                logger.addMiss(currentWeapon.tag);
             }
 
 
