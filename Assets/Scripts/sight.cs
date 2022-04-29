@@ -20,6 +20,7 @@ public class sight : MonoBehaviour
         projectileShoot = gameObject.GetComponent<shootProjectile>();
     }
 
+    //sets new sight target
     public void SetTarget(GameObject newTarget)
     {
         target = newTarget;
@@ -67,6 +68,7 @@ public class sight : MonoBehaviour
                 }
             }
 
+            //sends target to shooting script if target is visible
             if (targetSighted == true)
             {
 

@@ -12,6 +12,7 @@ public class StartMenu : MonoBehaviour
         Application.Quit();
     }
 
+    //load the main game scene
     public void startGame()
     {
         SceneManager.LoadScene("Standard", LoadSceneMode.Single);

@@ -21,6 +21,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //camera is moved every frame to follow player position
         newCameraPos = player.transform.position;
         newCameraPos.y += 23.75f;
 

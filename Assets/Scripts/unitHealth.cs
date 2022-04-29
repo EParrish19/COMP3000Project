@@ -13,7 +13,7 @@ public class unitHealth : MonoBehaviour
     private GameObject deathTrackerObject;
     
 
-
+    //reduces enemy health by the player weapon's damage
     void takeDamage(float damage)
     {
         health -= damage;
@@ -23,15 +23,17 @@ public class unitHealth : MonoBehaviour
         }
     }
 
+    //if health is 0, remove the enemy from play
     void die()
     {
         deathTrackerObject.SendMessage("reduceEnemyNumber");
         GameObject player = GameObject.Find("Player");
 
-        player.SendMessage("resetTarget");
+        
 
         gameObject.SetActive(false);
-        
-        
+        player.SendMessage("resetTarget");
+
+
     }
 }

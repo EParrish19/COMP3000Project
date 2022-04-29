@@ -19,7 +19,7 @@ public class ClickTarget : MonoBehaviour
         markerPrefab = Resources.Load<GameObject>("Prefabs/Marker");
     }
 
-    // Update is called once per frame
+    // target enemy can be changed with left click
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))

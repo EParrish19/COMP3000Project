@@ -45,6 +45,7 @@ public class unitWeapon
         public int burstLength;
         public string tag;
 
+        //if burst length specified
         public unitWeapon(string newWeaponName, string newTag ,float newWeaponDamage, float newWeaponfireTime, float newWeaponAccuracyRange, int newWeaponBurstLength)
         {
             weaponName = newWeaponName;
@@ -55,6 +56,7 @@ public class unitWeapon
             tag = newTag;
         }
 
+        //if weapon does not use burst fire
         public unitWeapon(string newWeaponName, string newTag ,float newWeaponDamage, float newWeaponFireTime, float newWeaponAccuracyRange)
         {
             weaponName = newWeaponName;
@@ -66,7 +68,7 @@ public class unitWeapon
         }
     }
 
-    //on start, stores the current gameobject as a variable
+    //on start, stores the current gameobject as a variable, initialises other variables
     private void Start()
     {
         thisEntity = gameObject;
@@ -93,16 +95,19 @@ public class unitWeapon
 
     }
 
+    //changes sighted enemy
     public void setTargetSighted(bool targetInSight)
     {
         targetSighted = targetInSight;
     }
 
+    //sets new target
     public void setTarget(GameObject newTarget)
     {
         target = newTarget;
     }
 
+    //cycles weapon to the next weapon, returns to first weapon if last weapon is swapped
     public void nextWeapon()
     {
         if (currentWeaponIndex == unitWeapons.Length - 1)
@@ -121,6 +126,7 @@ public class unitWeapon
         }
     }
 
+    //cycles weapon to the previous weapon, goes to last weapon if first weapon is swapped
     public void previousWeapon()
     {
         if(currentWeaponIndex == 0)
@@ -136,6 +142,7 @@ public class unitWeapon
     }
 
 
+    //shoots a shot at the current target
     public void Shoot(GameObject target)
     {
         //seperate ray for the actual projectile
@@ -143,17 +150,22 @@ public class unitWeapon
         Vector3 targetPosition = target.transform.position;
         Vector3 direction = (targetPosition - thisEntityPosition).normalized;
 
+        //if the player entity has a height advantage on the target
         if(thisEntityPosition.y > targetPosition.y)
         {
             float advantagedAccuracyRange = currentWeapon.accuracyRange / 2;
 
             direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(0.0f, advantagedAccuracyRange), Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange)));
+
+        //if the target has a height advantage on the player
         }else if(thisEntityPosition.y < targetPosition.y)
         {
             float disadvantagedAccuracyRange = currentWeapon.accuracyRange * 2;
 
             direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(0.0f, disadvantagedAccuracyRange), Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange)));
         }
+
+        //if the player and the enemy are at the same height
         else
         {
             direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange)));
@@ -233,6 +245,7 @@ public class unitWeapon
 
         Ray projectile = new Ray(thisEntityPosition, fwd);*/
 
+        //create a ray using the player unit's position and the modified direction
         Ray projectile = new Ray(thisEntityPosition, direction);
 
         //only needs to run if the target is in sight
@@ -241,6 +254,7 @@ public class unitWeapon
             RaycastHit targetHit;
             
 
+            //if projectile hits something, check if it's the target, if it is, damage the target and update logmaker, else miss the target and update logmaker
             if (Physics.Raycast(projectile,out targetHit))
             {
                 if (targetHit.transform.gameObject.name != null && targetHit.transform.gameObject.name == target.name)
@@ -293,23 +307,27 @@ public class unitWeapon
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        //while the target is sighted, fire current weapon at target
         if (targetSighted)
         {
             
-            
+            //all weapons have a time between shots/bursts
             if(timer <= 0.0f)
             {
+                //used for burst weapons, nmon-burst only goes once
                 for (int i = 0; i <= currentWeapon.burstLength; i++)
                 {
                     Shoot(target);
                     shotAudio.Play();
                 }
 
-
+                //reset timer
                 timer = currentWeapon.fireTime;
             }
             else
             {
+                //if the fire timer isn't at 0, decrease it
                 timer -= Time.deltaTime;
             }
         }
@@ -317,15 +335,16 @@ public class unitWeapon
            
     }
 
+    //reset linerenderer position
     void resetTracer()
     {
         shotTracer.SetPosition(1, gameObject.transform.position);
     }
 
+    //resets target sighted variable to stop shooting
     void resetTarget()
     {
         targetSighted = false;
-        target = null;
     }
 }
 
