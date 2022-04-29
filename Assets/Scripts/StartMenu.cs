@@ -17,4 +17,10 @@ public class StartMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Standard", LoadSceneMode.Single);
     }
+
+    //loads controls scene
+    public void showControls()
+    {
+        SceneManager.LoadScene("Controls", LoadSceneMode.Single);
+    }
 }
