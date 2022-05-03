@@ -15,17 +15,17 @@ public class LogMaker : MonoBehaviour
     private FileStream fs;
 
     //ints to track number of shots for accuracy calculation
-    private int autoTotal;
-    private int autoHit;
-    private int autoMiss;
+    private float autoTotal;
+    private float autoHit;
+    private float autoMiss;
 
-    private int semiTotal;
-    private int semiHit;
-    private int semiMiss;
+    private float semiTotal;
+    private float semiHit;
+    private float semiMiss;
 
-    private int burstTotal;
-    private int burstHit;
-    private int burstMiss;
+    private float burstTotal;
+    private float burstHit;
+    private float burstMiss;
 
 
     // Start is called before the first frame update
@@ -58,7 +58,14 @@ public class LogMaker : MonoBehaviour
             " Semi-Auto Accuracy: " + semiAutoAccuracy + 
             " Burst-Rifle Accuracy: " + burstAccuracy + Environment.NewLine);
 
-        fs.Write(info, (int)fs.Length, info.Length);
+        if (fs.Length > 0)
+        {
+            fs.Write(info, (int)fs.Length -1, info.Length);
+        }
+        else
+        {
+            fs.Write(info, (int)fs.Length, info.Length);
+        }
         fs.Close();
     }
 

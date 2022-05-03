@@ -33,7 +33,16 @@ public class clickMovement : MonoBehaviour
 
             if (Physics.Raycast(ray, out orderLocation))
             {
+                GameObject oldMarker = GameObject.FindGameObjectWithTag("PlayerMoveMarker");
+
+                if(oldMarker != null)
+                {
+                    Destroy(oldMarker);
+                }
+
+
                 GameObject newMoveTarget = Instantiate(moveTargetPrefab);
+                newMoveTarget.tag = "PlayerMoveMarker";
                 newMoveTarget.transform.position = orderLocation.point;
                 characterPathfinding.target = newMoveTarget.transform;
                 

@@ -82,4 +82,10 @@ public class sight : MonoBehaviour
               
         }
     }
+
+    void resetTarget()
+    {
+        targetSighted = false;
+        target = null;
+    }
 }

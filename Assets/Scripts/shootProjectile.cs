@@ -13,7 +13,7 @@ public class shootProjectile : MonoBehaviour
     private GameObject thisEntity;
     private GameObject target;
 
-    public unitWeapon autoRifle = new unitWeapon("Auto Rifle", "fullAuto" ,10.0f, 0.2f, 0.5f);
+    public unitWeapon autoRifle = new unitWeapon("Auto Rifle", "fullAuto" ,10.0f, 0.2f, 0.3f);
     public unitWeapon rifle = new unitWeapon("Semi-Auto Rifle", "semiAuto" ,33.0f, 0.7f, 0.1f);
     public unitWeapon burstRifle = new unitWeapon("Burst Rifle", "burst" ,20.0f, 0.5f, 0.2f, 3);
 
@@ -143,7 +143,7 @@ public class unitWeapon
 
 
     //shoots a shot at the current target
-    public void Shoot(GameObject target)
+    public void Shoot()
     {
         //seperate ray for the actual projectile
         Vector3 thisEntityPosition = thisEntity.transform.position;
@@ -294,7 +294,7 @@ public class unitWeapon
                 shotTracer.endColor = Color.blue;
 
                 shotTracer.SetPosition(0, gameObject.transform.position);
-                shotTracer.SetPosition(1, projectile.direction * 10);
+                shotTracer.SetPosition(1, thisEntityPosition + (projectile.direction * 100));
                 Invoke("resetTracer", currentWeapon.fireTime);
 
                 logger.addMiss(currentWeapon.tag);
@@ -318,7 +318,7 @@ public class unitWeapon
                 //used for burst weapons, nmon-burst only goes once
                 for (int i = 0; i <= currentWeapon.burstLength; i++)
                 {
-                    Shoot(target);
+                    Invoke("Shoot", 0.2f);
                     shotAudio.Play();
                 }
 
