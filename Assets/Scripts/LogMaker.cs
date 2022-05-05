@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System.Text;
-using System;
 
 public class LogMaker : MonoBehaviour
 {
@@ -12,7 +10,7 @@ public class LogMaker : MonoBehaviour
 
     private float timeTaken = 0.0f;
 
-    private FileStream fs;
+    private StreamWriter sw;
 
     //ints to track number of shots for accuracy calculation
     private float autoTotal;
@@ -35,7 +33,14 @@ public class LogMaker : MonoBehaviour
 
         logFilePath = Application.persistentDataPath + "/testLog " + testDate + ".txt";
 
-        fs = File.Open(logFilePath, FileMode.OpenOrCreate);
+        if (File.Exists(logFilePath))
+        {
+            sw = new StreamWriter(File.Open(logFilePath, FileMode.Append));
+        }
+        else
+        {
+            sw = new StreamWriter(File.Open(logFilePath, FileMode.Create));
+        }
     }
 
     // Update is called once per frame
@@ -48,25 +53,22 @@ public class LogMaker : MonoBehaviour
     void saveFile()
     {
 
-        float fullAutoAccuracy = (autoHit - autoMiss) / autoTotal;
-        float semiAutoAccuracy = (semiHit - semiMiss) / semiTotal;
-        float burstAccuracy = (burstHit - burstMiss) / burstTotal;
+        float fullAutoAccuracy = (autoMiss - autoHit) / autoTotal;
+        float semiAutoAccuracy = (semiMiss - semiHit) / semiTotal;
+        float burstAccuracy = (burstMiss - burstHit) / burstTotal;
 
         Debug.Log("Saving Test Log to: " + logFilePath);
-        byte[] info = new UTF8Encoding(true).GetBytes(System.DateTime.Now.TimeOfDay + " Time Taken: " + timeTaken + " seconds" + 
+
+        string info = System.DateTime.Now.TimeOfDay + " Time Taken: " + timeTaken + " seconds" + 
             " Assault Rifle Accuracy: " + fullAutoAccuracy + 
             " Semi-Auto Accuracy: " + semiAutoAccuracy + 
-            " Burst-Rifle Accuracy: " + burstAccuracy + Environment.NewLine);
+            " Burst-Rifle Accuracy: " + burstAccuracy;
 
-        if (fs.Length > 0)
-        {
-            fs.Write(info, (int)fs.Length -1, info.Length);
-        }
-        else
-        {
-            fs.Write(info, (int)fs.Length, info.Length);
-        }
-        fs.Close();
+        sw.WriteLine(info);
+        sw.WriteLine();
+        sw.Close();
+
+        
     }
 
     //increases number of hits and total shots fired for each weapon
