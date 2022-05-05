@@ -53,16 +53,16 @@ public class LogMaker : MonoBehaviour
     void saveFile()
     {
 
-        float fullAutoAccuracy = (autoMiss - autoHit) / autoTotal;
-        float semiAutoAccuracy = (semiMiss - semiHit) / semiTotal;
-        float burstAccuracy = (burstMiss - burstHit) / burstTotal;
+        float fullAutoAccuracy = (1 - ((autoMiss - autoHit) / autoTotal)) * 100;
+        float semiAutoAccuracy = (1 - ((semiMiss - semiHit) / semiTotal)) * 100;
+        float burstAccuracy = (1 - ((burstMiss - burstHit) / burstTotal)) * 100;
 
         Debug.Log("Saving Test Log to: " + logFilePath);
 
         string info = System.DateTime.Now.TimeOfDay + " Time Taken: " + timeTaken + " seconds" + 
             " Assault Rifle Accuracy: " + fullAutoAccuracy + 
-            " Semi-Auto Accuracy: " + semiAutoAccuracy + 
-            " Burst-Rifle Accuracy: " + burstAccuracy;
+            "% Semi-Auto Accuracy: " + semiAutoAccuracy + 
+            "% Burst-Rifle Accuracy: " + burstAccuracy + "%";
 
         sw.WriteLine(info);
         sw.WriteLine();
