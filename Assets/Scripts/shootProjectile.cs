@@ -155,20 +155,29 @@ public class unitWeapon
         {
             float advantagedAccuracyRange = currentWeapon.accuracyRange / 2;
 
-            direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), Random.Range(0.0f, advantagedAccuracyRange), Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange)));
+            direction += thisEntity.transform.TransformDirection(new Vector3(
+                Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange), 
+                Random.Range(0.0f, advantagedAccuracyRange), 
+                Random.Range(-advantagedAccuracyRange, advantagedAccuracyRange)));
 
         //if the target has a height advantage on the player
         }else if(thisEntityPosition.y < targetPosition.y)
         {
             float disadvantagedAccuracyRange = currentWeapon.accuracyRange * 2;
 
-            direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), Random.Range(0.0f, disadvantagedAccuracyRange), Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange)));
+            direction += thisEntity.transform.TransformDirection(new Vector3(
+                Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange), 
+                Random.Range(0.0f, disadvantagedAccuracyRange), 
+                Random.Range(-disadvantagedAccuracyRange, disadvantagedAccuracyRange)));
         }
 
         //if the player and the enemy are at the same height
         else
         {
-            direction += thisEntity.transform.TransformDirection(new Vector3(Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), Random.Range(0.0f, currentWeapon.accuracyRange), Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange)));
+            direction += thisEntity.transform.TransformDirection(new Vector3(
+                Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange), 
+                Random.Range(0.0f, currentWeapon.accuracyRange), 
+                Random.Range(-currentWeapon.accuracyRange, currentWeapon.accuracyRange)));
         }
 
         //direction = direction.normalized;*/
